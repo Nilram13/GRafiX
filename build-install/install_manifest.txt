@@ -1,0 +1,5 @@
+C:/libs/GrafiX/include/GrafiX/GrafiX.hpp
+C:/libs/GrafiX/include/GrafiX.hpp
+C:/libs/GrafiX/lib/cmake/GrafiX/GrafiXTargets.cmake
+C:/libs/GrafiX/lib/cmake/GrafiX/GrafiXConfig.cmake
+C:/libs/GrafiX/lib/cmake/GrafiX/GrafiXConfigVersion.cmake

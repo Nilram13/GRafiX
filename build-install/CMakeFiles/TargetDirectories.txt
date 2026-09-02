@@ -1,0 +1,4 @@
+C:/Users/sysadmin/CLionProjects/GrafiX/build-install/CMakeFiles/GrafiX.dir
+C:/Users/sysadmin/CLionProjects/GrafiX/build-install/CMakeFiles/INSTALL.dir
+C:/Users/sysadmin/CLionProjects/GrafiX/build-install/CMakeFiles/ALL_BUILD.dir
+C:/Users/sysadmin/CLionProjects/GrafiX/build-install/CMakeFiles/ZERO_CHECK.dir

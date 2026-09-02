@@ -1,0 +1,8 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# GrafiX depends on SFML
+find_dependency(SFML 3 COMPONENTS Graphics Window System)
+
+include("${CMAKE_CURRENT_LIST_DIR}/GrafiXTargets.cmake")
