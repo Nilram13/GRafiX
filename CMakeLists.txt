@@ -45,8 +45,8 @@ else()
 endif()
 
 FetchContent_Declare(SFML
-  GIT_REPOSITORY https://github.com/SFML/SFML.git
-  GIT_TAG 3.0.2
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 3.0.2
 )
 FetchContent_MakeAvailable(SFML)
 
@@ -57,13 +57,13 @@ add_library(GrafiX STATIC GrafiX.cpp)
 add_library(GrafiX::GrafiX ALIAS GrafiX)
 
 target_include_directories(GrafiX PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
 
 target_link_libraries(GrafiX PUBLIC
-  SFML::Graphics
-  SFML::Window
-  SFML::System
+        SFML::Graphics
+        SFML::Window
+        SFML::System
 )
 
 if (WIN32)
@@ -71,27 +71,28 @@ if (WIN32)
 endif()
 
 # ------------------------------------------------------------
-# Copy SFML headers + libs into <repo>/SFML/<cfg>/
-# (so you can reuse it easily in another project)
+# KORREKTUR: Kopieren der Header & echten Targets
 # ------------------------------------------------------------
+# Nutze die echten Target-Namen (sfml-system statt SFML::System)
+# Hinweis: Wenn SHARED_LIBS OFF ist, kopiert das die .lib-Dateien.
 add_custom_command(TARGET GrafiX POST_BUILD
-  # include/
-  COMMAND ${CMAKE_COMMAND} -E make_directory
-          "${GRAFIX_SFML_ROOT}/${_cfg}/include"
-  COMMAND ${CMAKE_COMMAND} -E copy_directory
-          "${sfml_SOURCE_DIR}/include"
-          "${GRAFIX_SFML_ROOT}/${_cfg}/include"
+        # include/
+        COMMAND ${CMAKE_COMMAND} -E make_directory
+        "${GRAFIX_SFML_ROOT}/${_cfg}/include"
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        "${sfml_SOURCE_DIR}/include"
+        "${GRAFIX_SFML_ROOT}/${_cfg}/include"
 
-  # lib/
-  COMMAND ${CMAKE_COMMAND} -E make_directory
-          "${GRAFIX_SFML_ROOT}/${_cfg}/lib"
-  COMMAND ${CMAKE_COMMAND} -E copy_if_different
-          "$<TARGET_FILE:SFML::System>"
-          "$<TARGET_FILE:SFML::Window>"
-          "$<TARGET_FILE:SFML::Graphics>"
-          "${GRAFIX_SFML_ROOT}/${_cfg}/lib"
-  
-  COMMENT "Staging SFML into ${GRAFIX_SFML_ROOT}/${_cfg}"
+        # lib/
+        COMMAND ${CMAKE_COMMAND} -E make_directory
+        "${GRAFIX_SFML_ROOT}/${_cfg}/lib"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:sfml-system>"
+        "$<TARGET_FILE:sfml-window>"
+        "$<TARGET_FILE:sfml-graphics>"
+        "${GRAFIX_SFML_ROOT}/${_cfg}/lib"
+
+        COMMENT "Staging SFML into ${GRAFIX_SFML_ROOT}/${_cfg}"
 )
 
 # ------------------------------------------------------------
